@@ -30,8 +30,8 @@
 
   </metadata>
   <files>
-    <file src="..\..\lib\Zebble.WebView.iOS.*" target="lib\Xamarin.iOS10\" />
-    <file src="..\..\lib\Zebble.WebView.Android.*" target="lib\MonoAndroid10\" />
-    <file src="..\..\lib\Zebble.WebView.UWP.*" target="lib\UAP10\" />
+    <file src="..\..\lib\Zebble.Facebook.iOS.*" target="lib\Xamarin.iOS10\" />
+    <file src="..\..\lib\Zebble.Facebook.Android.*" target="lib\MonoAndroid10\" />
+    <file src="..\..\lib\Zebble.Facebook.UWP.*" target="lib\UAP10\" />
   </files>
 </package>
