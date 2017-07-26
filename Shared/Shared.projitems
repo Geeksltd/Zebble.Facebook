@@ -16,6 +16,5 @@
     <None Include="$(MSBuildThisFileDirectory)NuGet\CreatePackage.bat" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.exe" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.nuspec" />
-    <None Include="$(MSBuildThisFileDirectory)NuGet\Zebble.Plugin.WebView.4.1.214.nupkg" />
   </ItemGroup>
 </Project>

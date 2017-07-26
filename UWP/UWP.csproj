@@ -109,17 +109,16 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.2.3</Version>
     </PackageReference>
+    <PackageReference Include="Zebble">
+      <Version>4.0.245</Version>
+    </PackageReference>
     <PackageReference Include="Zebble.Plugin.WebView">
-      <Version>4.1.215</Version>
+      <Version>4.1.217</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zebble.UWP">
-      <HintPath>..\packages\Zebble.4.0.236\lib\UAP10\Zebble.UWP.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
