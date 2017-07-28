@@ -34,6 +34,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\portable-net45+netcore45+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -43,10 +47,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Core" />
     <Reference Include="Zebble.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zebble.4.0.245\lib\Xamarin.iOS10\Zebble.iOS.dll</HintPath>
+      <HintPath>..\packages\Zebble.4.0.249\lib\Xamarin.iOS10\Zebble.iOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zebble.WebView.iOS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zebble.Plugin.WebView.4.1.217\lib\Xamarin.iOS10\Zebble.WebView.iOS.dll</HintPath>
+      <HintPath>..\packages\Zebble.Plugin.WebView.4.1.227\lib\Xamarin.iOS10\Zebble.WebView.iOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
