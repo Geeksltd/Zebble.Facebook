@@ -3,7 +3,7 @@
   <metadata>
     <id>Zebble.Plugin.Facebook</id>
     <version>2.1.428</version>
-    <title>Facebook for Zebble for Xamarin</title>
+    <title>Facebook for Zebble (Xamarin)</title>
     <description>Facebook Login, register and other functionality for Zebble apps.</description>
     <iconUrl>https://raw.githubusercontent.com/Geeksltd/Zebble.Facebook/master/Shared/Icon.png</iconUrl>
     <authors>Mobile App Technologies Ltd</authors>
