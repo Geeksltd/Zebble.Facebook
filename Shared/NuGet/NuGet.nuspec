@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Zebble.Plugin.Facebook</id>
-    <version>2.1.428</version>
+    <id>Zebble.Facebook</id>
+    <version>2.1.431</version>
     <title>Facebook for Zebble (Xamarin)</title>
     <description>Facebook Login, register and other functionality for Zebble apps.</description>
     <iconUrl>https://raw.githubusercontent.com/Geeksltd/Zebble.Facebook/master/Shared/Icon.png</iconUrl>
@@ -11,15 +11,7 @@
     <copyright>Copyright ©2017 | Mobile App Technologies Ltd</copyright>
     <projectUrl>https://github.com/Geeksltd/Zebble.Facebook</projectUrl>
     <dependencies>
-      <group targetFramework="UAP10">
-        <dependency id="Zebble.Plugin.WebView" version="4.1.227" />
-      </group>
-      <group targetFramework="MonoAndroid">
-        <dependency id="Zebble.Plugin.WebView" version="4.1.227" />
-      </group>
-      <group targetFramework="Xamarin.iOS10">
-        <dependency id="Zebble.Plugin.WebView" version="4.1.227" />
-      </group>
+      <dependency id="Zebble.WebView" version="4.1.227" />
     </dependencies>
   </metadata>
   <files>
