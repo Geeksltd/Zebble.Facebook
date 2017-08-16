@@ -14,7 +14,7 @@
         /// <summary>
         ///  Invoked when a login dialog is created. It allows you to customise its visual style.
         /// </summary>
-        public static Action<View, Plugin.WebView> CustomizeDialog;
+        public static Action<View, WebView> CustomizeDialog;
 
         static string ClientId => Config.Get("Facebook.App.Id");
 
@@ -103,7 +103,7 @@
             CurrentDialog = null;
         }
 
-        static async Task<Plugin.WebView> OpenDialog(string url, TaskCompletionSource<string> task)
+        static async Task<WebView> OpenDialog(string url, TaskCompletionSource<string> task)
         {
             // TODO: Add a cancel button too.
             CurrentDialog = new Stack();
@@ -119,7 +119,7 @@
             await CurrentDialog.Add(new Button().Text("Cancel").Background(color: Colors.Black)
                  .On(x => x.Tapped, () => { task.SetResult(null); CloseDialog(); }));
 
-            var browser = new Plugin.WebView(url).Size(100.Percent());
+            var browser = new WebView(url).Size(100.Percent());
             await CurrentDialog.Add(browser);
             CustomizeDialog?.Invoke(CurrentDialog, browser);
 
