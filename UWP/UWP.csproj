@@ -101,7 +101,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
-   <ItemGroup>
+  <ItemGroup>
     <None Include="project.json" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
