@@ -85,7 +85,7 @@
                 "fields=" + fields.Select(x => x.ToString().ToLower()).ToString(",") +
                 "&access_token=" + accessToken;
 
-            return await Device.ThreadPool.Run(async () =>
+            return await Thread.Pool.Run(async () =>
             {
                 using (var client = new HttpClient())
                 {
