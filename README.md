@@ -1,4 +1,4 @@
-[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.Facebook/master/Shared/NuGet/Icon.png "Zebble.Facebook"
+[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.Facebook/master/Shared/Icon.png "Zebble.Facebook"
 
 
 ## Zebble.Facebook
