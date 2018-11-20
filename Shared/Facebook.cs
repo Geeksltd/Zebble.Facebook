@@ -9,12 +9,10 @@
 
     public static partial class Facebook
     {
-        static View CurrentDialog;
-
         /// <summary>
-        ///  Invoked when a login dialog is created. It allows you to customise its visual style.
+        /// It allows you to customize its visual style.
         /// </summary>
-        public static Action<View, WebView> CustomizeDialog;
+        public static FacebookDialog CurrentDialog { get; set; }
 
         static string ClientId => Config.Get("Facebook.App.Id");
 
@@ -57,24 +55,20 @@
         {
             var task = new TaskCompletionSource<string>();
 
-            var browser = await OpenDialog(GetLoginUrl(requestedPermissions), task);
+            var url = GetLoginUrl(requestedPermissions);
 
-            browser.BrowserNavigated.Handle(() =>
+            if (CurrentDialog == null) CurrentDialog = new FacebookDialog { IsDefualtDialog = true };
+
+            CurrentDialog.RequestedUrl = url;
+            CurrentDialog.Canceled.Handle(() =>
             {
-                var uri = browser.Url.AsUri();
-
-                if (uri.AbsolutePath.EndsWith("/login_success.html"))
-                {
-                    var token = uri.Fragment.OrEmpty().TrimStart("#").Split('&')
-                    .FirstOrDefault(x => x.StartsWith("access_token="))?.TrimStart("access_token=");
-
-                    task.SetResult(token);
-                    CloseDialog();
-                    return Task.CompletedTask;
-                }
-                else
-                    return Task.CompletedTask;
+                CurrentDialog.RemoveSelf();
+                CurrentDialog = null;
+                task.SetResult(null);
             });
+            CurrentDialog.Succeeded.Handle(token => task.SetResult(token));
+
+            await CurrentDialog.ShowDialog();
 
             return await task.Task;
         }
@@ -96,34 +90,76 @@
             });
         }
 
-        static void CloseDialog()
+    }
+
+    public class FacebookDialog : Stack
+    {
+        internal string RequestedUrl;
+        internal bool IsDefualtDialog;
+
+        internal readonly AsyncEvent<string> Succeeded = new AsyncEvent<string>();
+        internal readonly AsyncEvent Canceled = new AsyncEvent();
+
+        public readonly Stack Container = new Stack { Id = "FacebookContainer" };
+
+        public override async Task OnInitializing()
         {
-            if (CurrentDialog == null) return;
-            CurrentDialog.Visible = false;
-            CurrentDialog = null;
+            await base.OnInitializing();
+
+            if (IsDefualtDialog)
+            {
+                await InitializeDefaultDialog();
+                await InitializeFacebook();
+            }
+            else await InitializeFacebook();
+
+            Container.ZIndex(1000);
+            await Add(Container);
         }
 
-        static async Task<WebView> OpenDialog(string url, TaskCompletionSource<string> task)
+        public Task ShowDialog() => View.Root.Add(this);
+
+        public Task CloseDialog()
         {
-            // TODO: Add a cancel button too.
-            CurrentDialog = new Stack();
-            CurrentDialog.Width.BindTo(View.Root.Width, x => x * 0.8f);
-            CurrentDialog.Height.BindTo(View.Root.Height, x => x * 0.8f);
-            CurrentDialog.ZIndex(1000);
+            this.Visible(value: false);
+            return Canceled.Raise();
+        }
 
-            CurrentDialog.CenterAlign(delayUntilRender: true).MiddleAlign(delayUntilRender: true)
-                .Background(color: Colors.White).Border(1, color: "#4267b2", radius: 5);
+        async Task InitializeDefaultDialog()
+        {
+            Container.Width.BindTo(View.Root.Width, x => x * 0.8f);
+            Container.Height.BindTo(View.Root.Height, x => x * 0.8f);
 
-            await View.Root.Add(CurrentDialog);
+            Container.CenterAlign(delayUntilRender: true)
+                     .MiddleAlign(delayUntilRender: true)
+                     .Background(color: Colors.White)
+                     .Border(1, color: "#4267b2", radius: 5);
 
-            await CurrentDialog.Add(new Button().Text("Cancel").Background(color: Colors.Black)
-                 .On(x => x.Tapped, () => { task.SetResult(null); CloseDialog(); }));
+            await Container.Add(new Button().Text("Cancel").Background(color: Colors.Black).TextColor(Colors.White).On(x => x.Tapped, () => CloseDialog()));
+        }
 
-            var browser = new WebView(url).Size(100.Percent());
-            await CurrentDialog.Add(browser);
-            CustomizeDialog?.Invoke(CurrentDialog, browser);
+        async Task InitializeFacebook()
+        {
+            var browser = new WebView(RequestedUrl).Size(100.Percent());
 
-            return browser;
+            browser.BrowserNavigated.Handle(() =>
+            {
+                var uri = browser.Url.AsUri();
+
+                if (uri.AbsolutePath.EndsWith("/login_success.html"))
+                {
+                    var token = uri.Fragment.OrEmpty().TrimStart("#").Split('&')
+                    .FirstOrDefault(x => x.StartsWith("access_token="))?.TrimStart("access_token=");
+
+                    Succeeded.Raise(token);
+                    this.Visible(value: false);
+                    return Task.CompletedTask;
+                }
+                else
+                    return Task.CompletedTask;
+            });
+
+            await Container.Add(browser);
         }
     }
 }
