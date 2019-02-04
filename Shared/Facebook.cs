@@ -1,11 +1,11 @@
 ﻿namespace Zebble
 {
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
 
     public static partial class Facebook
     {
@@ -18,7 +18,7 @@
 
         static string GetLoginUrl(string requestedPermissions)
         {
-            var returnUrl = ("http://" + "www.facebook.com/connect/login_success.html").UrlEncode();
+            var returnUrl = ("https://" + "www.facebook.com/connect/login_success.html").UrlEncode();
 
             return $"https://graph.facebook.com/oauth/authorize" +
                 $"?client_id={ClientId}" +
