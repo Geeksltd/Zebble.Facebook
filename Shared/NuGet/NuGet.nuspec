@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Zebble.Facebook</id>
-    <version>2.1.435</version>
+    <version>2.1.436</version>
     <title>Facebook for Zebble (Xamarin)</title>
     <description>Facebook Login, register and other functionality for Zebble apps.</description>
     <iconUrl>https://raw.githubusercontent.com/Geeksltd/Zebble.Facebook/master/Shared/Icon.png</iconUrl>
     <authors>Geeks Ltd</authors>
     <owners>Geeks Ltd</owners>
-    <copyright>Copyright © 2018 Geeks Ltd - All rights reserved.</copyright>
+    <copyright>Copyright © 2019 Geeks Ltd - All rights reserved.</copyright>
     <projectUrl>https://github.com/Geeksltd/Zebble.Facebook</projectUrl>
     <dependencies>
       <dependency id="Zebble.WebView" version="4.2.239" />
