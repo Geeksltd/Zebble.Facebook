@@ -105,11 +105,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Zebble">
-      <Version>4.4.147</Version>
+      <Version>4.4.153</Version>
     </PackageReference>
     <PackageReference Include="Zebble.WebView">
       <Version>4.2.239</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Facebook\Facebook.AppEvents.cs" />
+    <Compile Include="Facebook\Facebook.Dialog.cs" />
+    <Compile Include="Facebook\Facebook.Login.cs" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -9,6 +9,8 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Facebook.AccessToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Facebook.AppEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.Field.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.User.cs" />

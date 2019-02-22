@@ -20,7 +20,7 @@ namespace Zebble
             /// <summary>
             ///  The user's Login access token. This can be used for advanced or custom integration with Facebook Api.
             /// </summary>
-            public string AccessToken { get; set; }
+            public AccessToken AccessToken { get; set; }
 
             public Range<int> AgeRange
             {
