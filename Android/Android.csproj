@@ -129,9 +129,6 @@
     <Reference Include="Zebble.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Zebble.4.4.153\lib\MonoAndroid10\Zebble.Android.dll</HintPath>
     </Reference>
-    <Reference Include="Zebble.WebView.Android, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zebble.WebView.4.2.239\lib\MonoAndroid10\Zebble.WebView.Android.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
