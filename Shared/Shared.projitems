@@ -16,7 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.User.cs" />
     <None Include="$(MSBuildThisFileDirectory)Icon.png" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\CreatePackage.bat" />
-    <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.exe" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.nuspec" />
   </ItemGroup>
 </Project>
