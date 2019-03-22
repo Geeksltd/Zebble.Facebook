@@ -14,8 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,7 +126,7 @@
       <HintPath>..\packages\Xamarin.Facebook.Share.Android.4.38.0\lib\monoandroid81\Xamarin.Facebook.Share.Android.dll</HintPath>
     </Reference>
     <Reference Include="Zebble.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zebble.4.4.178\lib\MonoAndroid10\Zebble.Android.dll</HintPath>
+      <HintPath>..\packages\Zebble.4.4.185\lib\MonoAndroid10\Zebble.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
