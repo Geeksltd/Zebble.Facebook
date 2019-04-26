@@ -111,10 +111,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Zebble">
-      <Version>4.4.185</Version>
+      <Version>4.4.231</Version>
     </PackageReference>
     <PackageReference Include="Zebble.WebView">
-      <Version>4.2.239</Version>
+      <Version>4.2.244</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
