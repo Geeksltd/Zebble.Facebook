@@ -1,4 +1,6 @@
-﻿namespace Zebble
+﻿using System.Collections.Generic;
+
+namespace Zebble
 {
     using SDK = global::Facebook;
     using Foundation;
@@ -13,9 +15,10 @@
         static bool IsLoginCall = false;
         static readonly AsyncEvent<JObject> UserInfoFetched = new AsyncEvent<JObject>();
         static SDK.LoginKit.LoginManager LoginManager;
-        static string[] CurrentParameters;
+        private static string[] CurrentParameters;
 
         public static User CurrentUser;
+        public static AccessToken CurrentAccessToken;
 
         public readonly static AsyncEvent OnCancel = new AsyncEvent();
         public readonly static AsyncEvent<string> OnError = new AsyncEvent<string>();
@@ -53,6 +56,7 @@
             LoginManager.LogOut();
             IsLoginCall = false;
             CurrentUser = null;
+            CurrentAccessToken = null;
             return Task.CompletedTask;
         }
 
@@ -79,12 +83,30 @@
             }
             else
             {
-                var accessToken = result.Token;
-                if (accessToken.IsExpired) accessToken = await RefreshAccessToken();
-                
-                var param = NSDictionary.FromObjectAndKey(CurrentParameters.ToString(",").ToNs(), "fields".ToNs());
-                var request = new SDK.CoreKit.GraphRequest("me", param, accessToken.TokenString, null, "GET");
-                request.Start(new SDK.CoreKit.GraphRequestHandler(GraphCallback));
+                try
+                {
+                    var er = result.ToString();
+                    var accessToken = result.Token;
+                    if (accessToken.IsExpired) accessToken = await RefreshAccessToken();
+
+                    CurrentAccessToken = new AccessToken
+                    {
+                        TokenString = accessToken.TokenString,
+                        AppId = accessToken.AppId,
+                        UserId = accessToken.UserId
+                    };
+
+                    var param = NSDictionary.FromObjectAndKey(CurrentParameters.ToString(",").ToNs(), "fields".ToNs());
+                    var request = new SDK.CoreKit.GraphRequest("me", param, accessToken.TokenString, null, "GET");
+                    request.Start(new SDK.CoreKit.GraphRequestHandler(GraphCallback));
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine(e);
+                    Device.Log.Error(e);
+                    throw;
+                }
+
             }
         }
 
@@ -92,10 +114,17 @@
         {
             if (error == null)
             {
-                var data = JsonConvert.DeserializeObject<JObject>(result.ToString());
+                var data = new JObject();
+                foreach (var item in (NSDictionary)result)
+                {
+                    data.Add(item.Key.ToString(), new JValue(item.Value.ToString()));
+                }
                 if (IsLoginCall)
                 {
-                    CurrentUser = new User(data);
+                    CurrentUser = new User(data)
+                    {
+                        AccessToken = CurrentAccessToken
+                    };
                     await OnSuccess.Raise(CurrentUser);
                 }
                 else
