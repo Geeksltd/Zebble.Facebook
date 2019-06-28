@@ -6,6 +6,7 @@
     using Newtonsoft.Json.Linq;
     using Org.Json;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using SDK = Xamarin.Facebook;
 
@@ -113,7 +114,21 @@
                 var data = JsonConvert.DeserializeObject<JObject>(@object.ToString());
                 if (IsLoginCall)
                 {
-                    CurrentUser = new User(data);
+                    var token = SDK.AccessToken.CurrentAccessToken;
+                    CurrentUser = new User(data)
+                    {
+                        AccessToken = new AccessToken
+                        {
+                            TokenString = token.Token,
+                            AppId = token.ApplicationId,
+                            UserId = token.UserId,
+                            Permissions = token.Permissions.ToArray(),
+                            DeclinedPermissions = token.DeclinedPermissions.ToArray(),
+                            DataAccessExpirationDate = AccessToken.FromDate(token.DataAccessExpirationTime),
+                            ExpirationDate = AccessToken.FromDate(token.Expires),
+                            RefreshDate = AccessToken.FromDate(token.LastRefresh)
+                        }
+                    };
                     OnSuccess.Raise(CurrentUser);
                 }
                 else

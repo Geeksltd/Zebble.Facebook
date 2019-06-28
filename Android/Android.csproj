@@ -139,6 +139,7 @@
     <None Include="Zebble.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Facebook\Facebook.AccessToken.cs" />
     <Compile Include="Facebook\Facebook.AppEvemts.cs" />
     <Compile Include="Facebook\Facebook.cs" />
     <Compile Include="Facebook\Facebook.Login.cs" />
