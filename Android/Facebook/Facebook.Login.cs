@@ -41,12 +41,13 @@
             return Task.CompletedTask;
         }
 
-        public static async Task GetInfo(Field[] fields, Action<JObject> onCompleted)
+        public static Task GetInfo(Field[] fields, Action<JObject> onCompleted)
         {
             IsLoginCall = false;
             GetGraphData(SDK.AccessToken.CurrentAccessToken);
             UserInfoFetched.ClearHandlers();
             UserInfoFetched.Handle(user => onCompleted(user));
+            return Task.CompletedTask;
         }
 
         public static void OnActivityResult(int requestCode, int resultCode, Intent data)
@@ -124,9 +125,9 @@
                             UserId = token.UserId,
                             Permissions = token.Permissions.ToArray(),
                             DeclinedPermissions = token.DeclinedPermissions.ToArray(),
-                            DataAccessExpirationDate = AccessToken.FromDate(token.DataAccessExpirationTime),
-                            ExpirationDate = AccessToken.FromDate(token.Expires),
-                            RefreshDate = AccessToken.FromDate(token.LastRefresh)
+                            DataAccessExpirationDate = token.DataAccessExpirationTime.ToDateTime(),
+                            ExpirationDate = token.Expires.ToDateTime(),
+                            RefreshDate = token.LastRefresh.ToDateTime()
                         }
                     };
                     OnSuccess.Raise(CurrentUser);

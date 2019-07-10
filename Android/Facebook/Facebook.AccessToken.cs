@@ -3,13 +3,9 @@
     using Java.Util;
     using System;
 
-    public partial class Facebook
+    internal static class FacebookExtensions
     {
-        public partial class AccessToken
-        {
-            public static DateTime FromDate(Date date) =>
-                new DateTime(date.Year, date.Month, date.Day, date.Hours, date.Minutes, date.Seconds);
-
-        }
+        static DateTime UnixStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static DateTime ToDateTime(this Date date) => UnixStart.AddMilliseconds(date.Time);
     }
 }
