@@ -18,7 +18,7 @@
 
             internal SDK.AccessToken ToSDKAccessToken()
             {
-                return new SDK.AccessToken(TokenString, Permissions, DeclinedPermissions, AppId, UserId,
+                return new SDK.AccessToken(TokenString, Permissions, DeclinedPermissions, ExpiredPermissions, AppId, UserId,
                     ToNSDate(ExpirationDate), ToNSDate(RefreshDate), ToNSDate(DataAccessExpirationDate));
             }
         }

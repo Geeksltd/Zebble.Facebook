@@ -31,8 +31,8 @@ namespace Zebble
             IsLoginCall = true;
             CurrentParameters = GetRequredPermissions(requestedFiels);
             LoginManager = new SDK.LoginKit.LoginManager();
-            LoginManager.LogInWithReadPermissions(CurrentParameters, UIViewController,
-                new SDK.LoginKit.LoginManagerRequestTokenHandler(RequestTokenHandler));
+            LoginManager.LogIn(CurrentParameters, UIViewController,
+                new SDK.LoginKit.LoginManagerLoginResultBlockHandler(RequestTokenHandler));
 
             return Task.CompletedTask;
         }
@@ -45,7 +45,7 @@ namespace Zebble
 
             var param = NSDictionary.FromObjectAndKey(CurrentParameters.ToString(",").ToNs(), "fields".ToNs());
             var request = new SDK.CoreKit.GraphRequest("me", param, accessToken.TokenString, null, "GET");
-            request.Start(new SDK.CoreKit.GraphRequestHandler(GraphCallback));
+            request.Start(new SDK.CoreKit.GraphRequestBlockHandler(GraphCallback));
 
             UserInfoFetched.ClearHandlers();
             UserInfoFetched.Handle(user => onCompleted(user));
@@ -98,7 +98,7 @@ namespace Zebble
 
                     var param = NSDictionary.FromObjectAndKey(CurrentParameters.ToString(",").ToNs(), "fields".ToNs());
                     var request = new SDK.CoreKit.GraphRequest("me", param, accessToken.TokenString, null, "GET");
-                    request.Start(new SDK.CoreKit.GraphRequestHandler(GraphCallback));
+                    request.Start(new SDK.CoreKit.GraphRequestBlockHandler(GraphCallback));
                 }
                 catch (Exception e)
                 {

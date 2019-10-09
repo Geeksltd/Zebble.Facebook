@@ -18,7 +18,7 @@
 
         public static void CallEvent(EventNames eventName, Dictionary<ParameterNames, object> @params, double? valueToSum = null)
         {
-            var keys = @params.Select(x => x.Key.ToParameterName()).ToArray();
+            var keys = @params.Select(x => Enum.GetName(typeof(SDK.AppEventParameterName),x.Key.ToParameterName())).ToArray();
             var values = @params.Select(x => NSObject.FromObject(x.Value)).ToArray();
 
             var param = NSDictionary.FromObjectsAndKeys(values, keys);
@@ -55,7 +55,7 @@
                 SDK.AppEvents.LogPurchase(purchaseAmount, currency);
         }
 
-        static NSString ToEventName(this EventNames eventname)
+        static SDK.AppEventName ToEventName(this EventNames eventname)
         {
             switch (eventname)
             {
@@ -100,11 +100,11 @@
                 case EventNames.ViewContent:
                     return SDK.AppEventName.ViewedContent;
                 default:
-                    return null;
+                    return SDK.AppEventName.AchievedLevel;
             }
         }
 
-        static NSString ToParameterName(this ParameterNames paramName)
+        static SDK.AppEventParameterName ToParameterName(this ParameterNames paramName)
         {
             switch (paramName)
             {
@@ -137,7 +137,7 @@
                 case ParameterNames.Description:
                     return SDK.AppEventParameterName.Description;
                 default:
-                    return null;
+                    return SDK.AppEventParameterName.Content;
             }
         }
     }
