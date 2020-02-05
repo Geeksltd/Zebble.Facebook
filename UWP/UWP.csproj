@@ -118,6 +118,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ads\AdAgent.cs" />
+    <Compile Include="Ads\FacebookAdsViewRenderer.cs" />
     <Compile Include="Facebook\Facebook.AppEvents.cs" />
     <Compile Include="Facebook\Facebook.Dialog.cs" />
     <Compile Include="Facebook\Facebook.Login.cs" />

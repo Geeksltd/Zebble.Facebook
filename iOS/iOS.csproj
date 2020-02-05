@@ -69,6 +69,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ads\AdAgent.cs" />
+    <Compile Include="Ads\FacebookAdsViewRenderer.cs" />
     <Compile Include="Facebook\Facebook.AccessToken.cs" />
     <Compile Include="Facebook\Facebook.AppEvemts.cs" />
     <Compile Include="Facebook\Facebook.cs" />

@@ -9,6 +9,11 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\AdAgent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\Ads.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdMediaView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.AccessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.AppEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.cs" />
