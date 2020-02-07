@@ -212,6 +212,7 @@
     <Compile Include="Ads\FacebookAdsViewRenderer.cs" />
     <Compile Include="Ads\NativeAdInfo.cs" />
     <Compile Include="Ads\NativeView.cs" />
+    <Compile Include="Ads\RewardedVideo.cs" />
     <Compile Include="Facebook\Facebook.AccessToken.cs" />
     <Compile Include="Facebook\Facebook.AppEvemts.cs" />
     <Compile Include="Facebook\Facebook.cs" />

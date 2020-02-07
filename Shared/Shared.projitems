@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdMediaView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ads\NativeAdView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\RewardedVideo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.AccessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.AppEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Facebook.cs" />
