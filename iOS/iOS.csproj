@@ -34,6 +34,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook.AudienceNetwork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Facebook.AudienceNetwork.iOS.5.6.0\lib\xamarinios10\Facebook.AudienceNetwork.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.CoreKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Facebook.CoreKit.iOS.5.6.0\lib\xamarinios10\Facebook.CoreKit.dll</HintPath>
     </Reference>
@@ -70,7 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\AdAgent.cs" />
+    <Compile Include="Ads\IOSNativeMediaView.cs" />
     <Compile Include="Ads\FacebookAdsViewRenderer.cs" />
+    <Compile Include="Ads\NativeAdInfo.cs" />
+    <Compile Include="Ads\NativeView.cs" />
+    <Compile Include="Ads\RewardedVideo.cs" />
     <Compile Include="Facebook\Facebook.AccessToken.cs" />
     <Compile Include="Facebook\Facebook.AppEvemts.cs" />
     <Compile Include="Facebook\Facebook.cs" />

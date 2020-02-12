@@ -10,7 +10,7 @@
         public TextView HeadLineView { get; set; }
         public TextView BodyView { get; set; }
         public Button CallToActionView { get; set; }
-        public ImageView IconView { get; set; }
+        public NativeAdMediaView IconView { get; set; }
         public TextView SocialContextView { get; set; }
         public TextView AdvertiserView { get; set; }
         public NativeAdMediaView MediaView { get; set; }

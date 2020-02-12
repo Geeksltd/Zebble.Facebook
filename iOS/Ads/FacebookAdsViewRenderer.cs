@@ -10,7 +10,11 @@ namespace Zebble.FacebookAds
 
         public Task<UIView> Render(Renderer renderer)
         {
-            throw new NotSupportedException();
+            if (renderer.View is NativeAdView native) Result = new IOSNativeAdView(native);
+            else if (renderer.View is NativeAdMediaView media) Result = new IOSNativeMediaView(media);
+            else throw new NotSupportedException();
+
+            return Task.FromResult(Result);
         }
 
         public void Dispose()
