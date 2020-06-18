@@ -11,9 +11,6 @@
     <copyright>Copyright © 2020 Geeks Ltd - All rights reserved.</copyright>
     <projectUrl>https://github.com/Geeksltd/Zebble.Facebook</projectUrl>
     <dependencies>
-      <group targetFramework="MonoAndroid">
-        <dependency id="Xamarin.Facebook.Android" version="4.38.0" />
-      </group>
       <group targetFramework="Xamarin.iOS10">
         <dependency id="Xamarin.Facebook.iOS" version="4.39.1" />
       </group>
