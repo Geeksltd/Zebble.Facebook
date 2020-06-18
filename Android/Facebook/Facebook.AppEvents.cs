@@ -80,7 +80,7 @@
                 case EventNames.CustomizeProduct:
                     return SDK.AppEvents.AppEventsConstants.EventNameCustomizeProduct;
                 case EventNames.Donate:
-                    return SDK.AppEvents.AppEventsConstants.EventNameNonate;
+                    return SDK.AppEvents.AppEventsConstants.EventNameDonate;
                 case EventNames.FindLocation:
                     return SDK.AppEvents.AppEventsConstants.EventNameFindLocation;
                 case EventNames.InitiateCheckout:

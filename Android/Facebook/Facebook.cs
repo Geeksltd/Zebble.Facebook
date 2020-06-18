@@ -1,6 +1,5 @@
 ﻿namespace Zebble
 {
-    using Android.Arch.Lifecycle;
     using SDK = Xamarin.Facebook;
 
     public partial class Facebook
