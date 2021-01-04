@@ -9,7 +9,7 @@
 
         static Facebook()
         {
-            UIRuntime.OnOpenUrlWithOptions.Handle(args => OpenUrl(args.Item1, args.Item2, args.Item3));
+            UIRuntime.OnOpenUrlWithOptions.Handle(args => OpenUrl(args.Item1, args.Item2, args.Item3, args.Item4));
         }
 
         public static void Initialize()

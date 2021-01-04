@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Zebble
+﻿namespace Zebble
 {
     public partial class Facebook
     {
@@ -9,8 +7,8 @@ namespace Zebble
             AchieveLevel,
             InAppAdClick,
             AddPaymentInfo,
-            AddtoCart,
-            AddtoWishlist,
+            AddToCart,
+            AddToWishlist,
             CompleteRegistration,
             CompleteTutorial,
             Contact,
@@ -26,6 +24,7 @@ namespace Zebble
             Subscription,
             UnlockAchievement,
             ViewContent,
+            Search
         }
 
         public enum ParameterNames
@@ -35,14 +34,14 @@ namespace Zebble
             Success,
             ContentType,
             Currency,
-            ContentID,
+            ContentId,
             Content,
             RegistrationMethod,
             NumItems,
             PaymentInfoAvailable,
             MaxRatingValue,
             SearchString,
-            OrderID,
+            OrderId,
             Description
         }
     }

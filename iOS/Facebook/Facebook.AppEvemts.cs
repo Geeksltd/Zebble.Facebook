@@ -9,7 +9,7 @@
     public partial class Facebook
     {
         public static void FacebookAutoLogAppEventsEnabled(bool enable) => SDK.Settings.AutoLogAppEventsEnabled = enable;
-
+        
         public static void EnableUpdatesOnAccessTokenChange(bool enable) => SDK.Profile.EnableUpdatesOnAccessTokenChange(enable: enable);
 
         public static void SetAdvertiserIDCollectionEnabled(bool enable) => SDK.Settings.AdvertiserIdCollectionEnabled = enable;
@@ -55,9 +55,9 @@
                 SDK.AppEvents.LogPurchase(purchaseAmount, currency);
         }
 
-        static SDK.AppEventName ToEventName(this EventNames eventname)
+        static SDK.AppEventName ToEventName(this EventNames eventName)
         {
-            switch (eventname)
+            switch (eventName)
             {
                 case EventNames.AchieveLevel:
                     return SDK.AppEventName.AchievedLevel;
@@ -65,9 +65,9 @@
                     return SDK.AppEventName.AdClick;
                 case EventNames.AddPaymentInfo:
                     return SDK.AppEventName.AddedPaymentInfo;
-                case EventNames.AddtoCart:
+                case EventNames.AddToCart:
                     return SDK.AppEventName.AddedToCart;
-                case EventNames.AddtoWishlist:
+                case EventNames.AddToWishlist:
                     return SDK.AppEventName.AddedToWishlist;
                 case EventNames.CompleteRegistration:
                     return SDK.AppEventName.CompletedRegistration;
@@ -99,8 +99,10 @@
                     return SDK.AppEventName.UnlockedAchievement;
                 case EventNames.ViewContent:
                     return SDK.AppEventName.ViewedContent;
+                case EventNames.Search:
+                    return SDK.AppEventName.Searched;
                 default:
-                    return SDK.AppEventName.AchievedLevel;
+                    throw new ArgumentOutOfRangeException(nameof(eventName));
             }
         }
 
@@ -118,8 +120,8 @@
                     return SDK.AppEventParameterName.ContentType;
                 case ParameterNames.Currency:
                     return SDK.AppEventParameterName.Currency;
-                case ParameterNames.ContentID:
-                    return SDK.AppEventParameterName.ContentID;
+                case ParameterNames.ContentId:
+                    return SDK.AppEventParameterName.ContentId;
                 case ParameterNames.Content:
                     return SDK.AppEventParameterName.Content;
                 case ParameterNames.RegistrationMethod:
@@ -132,12 +134,12 @@
                     return SDK.AppEventParameterName.MaxRatingValue;
                 case ParameterNames.SearchString:
                     return SDK.AppEventParameterName.SearchString;
-                case ParameterNames.OrderID:
+                case ParameterNames.OrderId:
                     return SDK.AppEventParameterName.OrderId;
                 case ParameterNames.Description:
                     return SDK.AppEventParameterName.Description;
                 default:
-                    return SDK.AppEventParameterName.Content;
+                    throw new ArgumentOutOfRangeException(nameof(paramName));
             }
         }
     }

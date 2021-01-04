@@ -29,7 +29,7 @@ namespace Zebble.FacebookAds
 
         class NativeAdListener : NSObject, ads.INativeAdDelegate
         {
-            AdAgent Agent;
+            readonly AdAgent Agent;
 
             public NativeAdListener(AdAgent agent) => Agent = agent;
 

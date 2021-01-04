@@ -30,7 +30,7 @@ namespace Zebble.FacebookAds
 
         class RewardedVideoListener : NSObject, ads.IRewardedVideoAdDelegate
         {
-            RewardedVideoAd Ad;
+            readonly RewardedVideoAd Ad;
 
             public RewardedVideoListener(RewardedVideoAd ad) => Ad = ad;
 

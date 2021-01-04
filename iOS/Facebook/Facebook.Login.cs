@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Zebble
+﻿namespace Zebble
 {
     using SDK = global::Facebook;
     using Foundation;
     using System.Threading.Tasks;
     using System;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using UIKit;
+    using Olive;
 
     public partial class Facebook
     {
@@ -20,16 +18,16 @@ namespace Zebble
         public static User CurrentUser;
         public static AccessToken CurrentAccessToken;
 
-        public readonly static AsyncEvent OnCancel = new AsyncEvent();
-        public readonly static AsyncEvent<string> OnError = new AsyncEvent<string>();
-        public readonly static AsyncEvent<User> OnSuccess = new AsyncEvent<User>();
+        public static readonly AsyncEvent OnCancel = new AsyncEvent();
+        public static readonly AsyncEvent<string> OnError = new AsyncEvent<string>();
+        public static readonly AsyncEvent<User> OnSuccess = new AsyncEvent<User>();
 
         public static int ProfileImageWidth = 200, ProfileImageHeight = 200;
 
-        public static Task Login(params Field[] requestedFiels)
+        public static Task Login(params Field[] requestedFields)
         {
             IsLoginCall = true;
-            CurrentParameters = GetRequredPermissions(requestedFiels);
+            CurrentParameters = GetRequiredPermissions(requestedFields);
             LoginManager = new SDK.LoginKit.LoginManager();
             LoginManager.LogIn(CurrentParameters, UIViewController,
                 new SDK.LoginKit.LoginManagerLoginResultBlockHandler(RequestTokenHandler));
@@ -37,7 +35,7 @@ namespace Zebble
             return Task.CompletedTask;
         }
 
-        public static async Task GetInfo(Field[] fields, Action<JObject> onCompleted)
+        public static async Task GetInfo(Action<JObject> onCompleted)
         {
             IsLoginCall = false;
 
@@ -48,7 +46,7 @@ namespace Zebble
             request.Start(new SDK.CoreKit.GraphRequestBlockHandler(GraphCallback));
 
             UserInfoFetched.ClearHandlers();
-            UserInfoFetched.Handle(user => onCompleted(user));
+            UserInfoFetched.Handle(onCompleted);
         }
 
         public static Task LogOut()
@@ -65,16 +63,16 @@ namespace Zebble
             SDK.CoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(application, options);
         }
 
-        public static void OpenUrl(UIApplication application, NSUrl url, NSDictionary options)
+        public static void OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSDictionary options)
         {
-            SDK.CoreKit.ApplicationDelegate.SharedInstance.OpenUrl(application, url, options);
+            SDK.CoreKit.ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, options);
         }
 
         static async void RequestTokenHandler(SDK.LoginKit.LoginManagerLoginResult result, NSError error)
         {
             if (error != null)
             {
-                Device.Log.Error("An error occured in Facebook :[" + error + "]");
+                Device.Log.Error("An error occurred in Facebook :[" + error + "]");
                 await OnError.Raise(error.ToString());
             }
             else if (result.IsCancelled)

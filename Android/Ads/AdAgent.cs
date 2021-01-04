@@ -23,7 +23,7 @@ namespace Zebble.FacebookAds
         }
 
         void RequestNativeAd() => NativeAd.LoadAd();
-
+        
         public Android.Views.View Render(ads.NativeAdViewAttributes attrs) => ads.NativeAdView.Render(Renderer.Context, NativeAd, attrs);
 
         class NativeAdListener : Java.Lang.Object, ads.INativeAdListener

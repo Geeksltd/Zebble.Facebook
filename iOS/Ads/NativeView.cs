@@ -9,13 +9,13 @@ namespace Zebble.FacebookAds
     {
         NativeAdView View;
         NativeAdInfo CurrentAd;
-        AdAgent Agent;
+        readonly AdAgent Agent;
 
         public IOSNativeAdView(NativeAdView view)
         {
             View = view;
 
-            Agent = (view.Agent ?? throw new Exception(".NativeAdView.Agent is null"));
+            Agent = view.Agent ?? throw new Exception(".NativeAdView.Agent is null");
 
             var attributes = new ads.NativeAdViewAttributes { BackgroundColor = UIColor.Clear };
 
@@ -52,9 +52,9 @@ namespace Zebble.FacebookAds
 
                 var iconView = View.IconView?.Native();
                 var mediaView = View.MediaView?.Native();
-                var callToactionView = View.CallToActionView?.Native();
+                var callToActionView = View.CallToActionView?.Native();
 
-                var clickables = new UIView[2] { mediaView, callToactionView };
+                var clickables = new UIView[2] { mediaView, callToActionView };
 
                 nativeAd.RegisterView(
                     view: this,

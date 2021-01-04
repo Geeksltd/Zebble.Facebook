@@ -9,6 +9,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using SDK = Xamarin.Facebook;
+    using Olive;
 
     public partial class Facebook
     {
@@ -19,16 +20,16 @@
         static SDK.Login.LoginManager LoginManager => SDK.Login.LoginManager.Instance;
 
         public static User CurrentUser;
-        public readonly static AsyncEvent OnCancel = new AsyncEvent();
-        public readonly static AsyncEvent<string> OnError = new AsyncEvent<string>();
-        public readonly static AsyncEvent<User> OnSuccess = new AsyncEvent<User>();
+        public static readonly AsyncEvent OnCancel = new AsyncEvent();
+        public static readonly AsyncEvent<string> OnError = new AsyncEvent<string>();
+        public static readonly AsyncEvent<User> OnSuccess = new AsyncEvent<User>();
 
         public static int ProfileImageWidth = 200, ProfileImageHeight = 200;
 
-        public static async Task Login(params Field[] requestedFiels)
+        public static async Task Login(params Field[] requestedFields)
         {
             IsLoginCall = true;
-            CurrentParameters = await SetRequirments(requestedFiels);
+            CurrentParameters = await SetRequirements(requestedFields);
             LoginManager.LogInWithReadPermissions(UIRuntime.CurrentActivity, CurrentParameters);
         }
 
@@ -46,7 +47,7 @@
             IsLoginCall = false;
             GetGraphData(SDK.AccessToken.CurrentAccessToken);
             UserInfoFetched.ClearHandlers();
-            UserInfoFetched.Handle(user => onCompleted(user));
+            UserInfoFetched.Handle(onCompleted);
             return Task.CompletedTask;
         }
 
@@ -55,11 +56,11 @@
             CallbackManager.OnActivityResult(requestCode, resultCode, data);
         }
 
-        static Task<string[]> SetRequirments(Field[] fiels)
+        static Task<string[]> SetRequirements(Field[] fields)
         {
             CallbackManager = SDK.CallbackManagerFactory.Create();
             LoginManager.RegisterCallback(CallbackManager, new FacebookCallback());
-            return Task.FromResult(GetRequredPermissions(fiels));
+            return Task.FromResult(GetRequiredPermissions(fields));
         }
 
         static void GetGraphData(SDK.AccessToken accessToken)
@@ -83,7 +84,7 @@
 
             public void OnError(SDK.FacebookException error)
             {
-                Device.Log.Error("An error occured in Facebook :[" + error + "]");
+                Device.Log.Error("An error occurred in Facebook :[" + error + "]");
                 Facebook.OnError.Raise(error.ToString());
             }
 
@@ -104,7 +105,7 @@
 
             public void OnTokenRefreshFailed(SDK.FacebookException exception)
             {
-                Device.Log.Error($"An error occured in Facebook access token : [{exception}]");
+                Device.Log.Error($"An error occurred in Facebook access token : [{exception}]");
             }
         }
 

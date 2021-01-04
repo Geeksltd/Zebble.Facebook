@@ -2,10 +2,10 @@
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using System;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Olive;
 
     public partial class Facebook
     {
@@ -32,15 +32,15 @@
         /// </summary>
         public static async Task<User> Register(params Field[] fields)
         {
-            var token = await Login(GetRequredPermissions(fields).ToString(","));
-            if (token.LacksValue()) return null;
+            var token = await Login(GetRequiredPermissions(fields).ToString(","));
+            if (token.IsEmpty()) return null;
 
             return await GetUserInfo(token, fields);
         }
 
         public static Task<string> Login(params Field[] requestedFields)
         {
-            return Login(GetRequredPermissions(requestedFields).ToString(","));
+            return Login(GetRequiredPermissions(requestedFields).ToString(","));
         }
 
         /// <summary>
@@ -48,14 +48,14 @@
         /// </summary> 
         /// <param name="permissions">The permissions to get from the user, so the access token can be used to retrieve such data later on.
         /// See the full list of permissions here: https://developers.facebook.com/docs/facebook-login/permissions/.
-        /// Use GetRequredPermissions(...) to get the list.</param>
+        /// Use GetRequiredPermissions(...) to get the list.</param>
         public static async Task<string> Login(string requestedPermissions)
         {
             var task = new TaskCompletionSource<string>();
 
             var url = GetLoginUrl(requestedPermissions);
 
-            if (CurrentDialog == null) CurrentDialog = new FacebookDialog { IsDefualtDialog = true };
+            if (CurrentDialog == null) CurrentDialog = new FacebookDialog { IsDefaultDialog = true };
 
             CurrentDialog.RequestedUrl = url;
             CurrentDialog.Canceled.Handle(() =>
@@ -79,12 +79,10 @@
 
             return await Thread.Pool.Run(async () =>
             {
-                using (var client = new HttpClient())
-                {
-                    var json = await client.GetStringAsync(url);
-                    var data = JsonConvert.DeserializeObject<JObject>(json);
-                    return new User(data) { AccessToken = new AccessToken { TokenString = accessToken } };
-                }
+                using var client = new HttpClient();
+                var json = await client.GetStringAsync(url);
+                var data = JsonConvert.DeserializeObject<JObject>(json);
+                return new User(data) { AccessToken = new AccessToken { TokenString = accessToken } };
             });
         }
     }

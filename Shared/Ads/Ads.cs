@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zebble.FacebookAds
+﻿namespace Zebble.FacebookAds
 {
     public partial class Ads
     {

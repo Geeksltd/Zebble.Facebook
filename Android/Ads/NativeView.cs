@@ -30,7 +30,7 @@ namespace Zebble.FacebookAds
         {
             View = view;
 
-            Agent = (view.Agent ?? throw new Exception(".NativeAdView.Agent is null"));
+            Agent = view.Agent ?? throw new Exception(".NativeAdView.Agent is null");
 
             var attributes = new ads.NativeAdViewAttributes(Renderer.Context)
                 .SetBackgroundColor(Android.Graphics.Color.Transparent);
@@ -46,6 +46,9 @@ namespace Zebble.FacebookAds
             view.RotateRequested.Handle(LoadNext);
             LoadNext().RunInParallel();
         }
+
+        [Preserve]
+        public AndroidNativeAdView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
         async Task LoadNext()
         {
@@ -73,27 +76,24 @@ namespace Zebble.FacebookAds
                 var titleView = View.HeadLineView?.Native();
                 var bodyView = View.BodyView?.Native();
                 var mediaView = View.MediaView?.Native();
-                var callToactionView = View.CallToActionView?.Native();
+                var callToActionView = View.CallToActionView?.Native();
                 var socialContextView = View.SocialContextView?.Native();
 
-                var clickables = new List<Android.Views.View> { mediaView, callToactionView };
+                var clickables = new List<Android.Views.View> { mediaView, callToActionView };
 
                 nativeAd.RegisterViewForInteraction(
                     view: Container,
                     mediaView: mediaView as ads.MediaView,
                     clickableViews: clickables);
-
+                
                 if (iconView != null) NativeComponentTag.TagView(iconView, NativeComponentTag.AdIcon);
                 if (titleView != null) NativeComponentTag.TagView(titleView, NativeComponentTag.AdTitle);
                 if (bodyView != null) NativeComponentTag.TagView(bodyView, NativeComponentTag.AdBody);
                 if (mediaView != null) NativeComponentTag.TagView(mediaView, NativeComponentTag.AdMedia);
-                if (callToactionView != null) NativeComponentTag.TagView(callToactionView, NativeComponentTag.AdCallToAction);
+                if (callToActionView != null) NativeComponentTag.TagView(callToActionView, NativeComponentTag.AdCallToAction);
                 if (socialContextView != null) NativeComponentTag.TagView(socialContextView, NativeComponentTag.AdSocialContext);
             }
         }
-
-        [Preserve]
-        public AndroidNativeAdView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
         protected override void Dispose(bool disposing)
         {

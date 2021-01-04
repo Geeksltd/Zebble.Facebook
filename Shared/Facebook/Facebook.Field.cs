@@ -1,8 +1,8 @@
 ﻿namespace Zebble
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Olive;
 
     partial class Facebook
     {
@@ -10,7 +10,7 @@
         // id, name, first_name, last_name, age_range, link, gender, locale, picture, timezone, updated_time, verified;
 
         // Full list of permissions: https://developers.facebook.com/docs/facebook-login/permissions/
-        static Dictionary<string, string> FieldPermissions = new Dictionary<string, string>
+        static readonly Dictionary<string, string> FieldPermissions = new Dictionary<string, string>
         {
             {"email", "email"},
             {"bio", "user_about_me"},
@@ -18,15 +18,15 @@
             // TODO: Add the rest of the mapping here.
         };
 
-        public static string[] GetRequredPermissions(Field[] fields)
+        public static string[] GetRequiredPermissions(Field[] fields)
         {
-            return GetRequredPermissions(fields.Select(x => x.ToString().ToLower()).ToArray());
+            return GetRequiredPermissions(fields.Select(x => x.ToString().ToLower()).ToArray());
         }
 
         /// <summary>
-        /// Returns the list of login permissions that should be requrested to read the full data in the specified fields.
+        /// Returns the list of login permissions that should be requested to read the full data in the specified fields.
         /// </summary>
-        public static string[] GetRequredPermissions(string[] fields)
+        public static string[] GetRequiredPermissions(string[] fields)
         {
             return fields.Select(x => FieldPermissions.GetOrDefault(x).Or("public_profile")).Trim().Distinct().ToArray();
         }
@@ -59,8 +59,6 @@
             /// The age segment for this person expressed as a minimum and maximum age. For example, more than 18, less than 21.
             /// </summary>
             Age_range
-
-
         }
     }
 }

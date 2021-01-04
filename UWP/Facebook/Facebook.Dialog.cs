@@ -1,15 +1,12 @@
 ﻿namespace Zebble
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
+    using Olive;
 
     public class FacebookDialog : Stack
     {
         internal string RequestedUrl;
-        internal bool IsDefualtDialog;
+        internal bool IsDefaultDialog;
 
         internal readonly AsyncEvent<string> Succeeded = new AsyncEvent<string>();
         internal readonly AsyncEvent Canceled = new AsyncEvent();
@@ -20,12 +17,10 @@
         {
             await base.OnInitializing();
 
-            if (IsDefualtDialog)
-            {
+            if (IsDefaultDialog)
                 await InitializeDefaultDialog();
-                await InitializeFacebook();
-            }
-            else await InitializeFacebook();
+
+            await InitializeFacebook();
 
             Container.ZIndex(1000);
             await Add(Container);

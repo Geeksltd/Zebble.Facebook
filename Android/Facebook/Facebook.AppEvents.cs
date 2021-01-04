@@ -6,12 +6,13 @@
     using SDK = Xamarin.Facebook;
     using Java.Util;
     using Java.Math;
+    using Olive;
 
     public partial class Facebook
     {
         static SDK.AppEvents.AppEventsLogger Logger = SDK.AppEvents.AppEventsLogger.NewLogger(UIRuntime.CurrentActivity);
 
-        public static void FacebookAutoLogAppEventsEnabled(bool enable) => SDK.FacebookSdk.AutoLogAppEventsEnabled = enable;
+        public static void IsLoggingBehaviorEnabled(SDK.LoggingBehavior loggingBehavior) => SDK.FacebookSdk.IsLoggingBehaviorEnabled(loggingBehavior);
 
         public static void CallEvent(EventNames eventName, Dictionary<ParameterNames, object> @params, double? valueToSum = null)
         {
@@ -57,9 +58,9 @@
                 Logger.LogPurchase(BigDecimal.ValueOf(purchaseAmount), currency.To<Currency>());
         }
 
-        static string ToEventName(this EventNames eventname)
+        static string ToEventName(this EventNames eventName)
         {
-            switch (eventname)
+            switch (eventName)
             {
                 case EventNames.AchieveLevel:
                     return SDK.AppEvents.AppEventsConstants.EventNameAchievedLevel;
@@ -67,9 +68,9 @@
                     return SDK.AppEvents.AppEventsConstants.EventNameAdClick;
                 case EventNames.AddPaymentInfo:
                     return SDK.AppEvents.AppEventsConstants.EventNameAddedPaymentInfo;
-                case EventNames.AddtoCart:
+                case EventNames.AddToCart:
                     return SDK.AppEvents.AppEventsConstants.EventNameAddedToCart;
-                case EventNames.AddtoWishlist:
+                case EventNames.AddToWishlist:
                     return SDK.AppEvents.AppEventsConstants.EventNameAddedToWishlist;
                 case EventNames.CompleteRegistration:
                     return SDK.AppEvents.AppEventsConstants.EventNameCompletedRegistration;
@@ -102,7 +103,7 @@
                 case EventNames.ViewContent:
                     return SDK.AppEvents.AppEventsConstants.EventNameViewedContent;
                 default:
-                    return null;
+                    throw new ArgumentOutOfRangeException(nameof(eventName));
             }
         }
 
@@ -120,7 +121,7 @@
                     return SDK.AppEvents.AppEventsConstants.EventParamContentType;
                 case ParameterNames.Currency:
                     return SDK.AppEvents.AppEventsConstants.EventParamCurrency;
-                case ParameterNames.ContentID:
+                case ParameterNames.ContentId:
                     return SDK.AppEvents.AppEventsConstants.EventParamContentId;
                 case ParameterNames.Content:
                     return SDK.AppEvents.AppEventsConstants.EventParamContent;
@@ -134,12 +135,12 @@
                     return SDK.AppEvents.AppEventsConstants.EventParamMaxRatingValue;
                 case ParameterNames.SearchString:
                     return SDK.AppEvents.AppEventsConstants.EventParamSearchString;
-                case ParameterNames.OrderID:
+                case ParameterNames.OrderId:
                     return SDK.AppEvents.AppEventsConstants.EventParamOrderId;
                 case ParameterNames.Description:
                     return SDK.AppEvents.AppEventsConstants.EventParamDescription;
                 default:
-                    return null;
+                    throw new ArgumentOutOfRangeException(nameof(paramName));
             }
         }
 
