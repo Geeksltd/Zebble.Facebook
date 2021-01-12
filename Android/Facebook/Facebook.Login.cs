@@ -84,7 +84,7 @@
 
             public void OnError(SDK.FacebookException error)
             {
-                Device.Log.Error("An error occurred in Facebook :[" + error + "]");
+                Olive.Log.For(this).Error(error, "An error occurred in Facebook.");
                 Facebook.OnError.Raise(error.ToString());
             }
 
@@ -105,7 +105,7 @@
 
             public void OnTokenRefreshFailed(SDK.FacebookException exception)
             {
-                Device.Log.Error($"An error occurred in Facebook access token : [{exception}]");
+                Olive.Log.For(this).Error(exception, "An error occurred in Facebook access token.");
             }
         }
 

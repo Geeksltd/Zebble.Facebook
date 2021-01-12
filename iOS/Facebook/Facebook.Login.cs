@@ -72,7 +72,7 @@
         {
             if (error != null)
             {
-                Device.Log.Error("An error occurred in Facebook :[" + error + "]");
+                Log.For(typeof(Facebook)).Error(null, "An error occurred in Facebook :[" + error + "]");
                 await OnError.Raise(error.ToString());
             }
             else if (result.IsCancelled)
@@ -100,8 +100,7 @@
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine(e);
-                    Device.Log.Error(e);
+                    Log.For(typeof(Facebook)).Error(e);
                     throw;
                 }
 

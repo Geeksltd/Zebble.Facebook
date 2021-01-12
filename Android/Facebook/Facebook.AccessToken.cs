@@ -2,6 +2,7 @@
 {
     using Java.Util;
     using System;
+    using Olive;
 
     internal static class FacebookExtensions
     {
@@ -14,7 +15,7 @@
             }
             catch (Exception ex)
             {
-                Device.Log.Error(ex);
+                Log.For(typeof(FacebookExtensions)).Error(ex);
                 return DateTime.Now.AddMinutes(5);
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ads = Xamarin.Facebook.Ads;
+using Olive;
 
 namespace Zebble.FacebookAds
 {
@@ -10,7 +11,7 @@ namespace Zebble.FacebookAds
         public AdAgent(string placementId)
         {
             PlacementId = placementId;
-            Device.Log.Message($"Facebook ads test device Id:{Ads.GetTestDeviceId()}");
+            Log.For(this).Debug($"Facebook ads test device Id:{Ads.GetTestDeviceId()}");
             Initialize();
         }
 

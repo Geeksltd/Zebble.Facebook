@@ -28,6 +28,7 @@
     <Authors>Geeks Ltd</Authors>
     <Copyright>Geeks Ltd 2020, All rights reserved.</Copyright>
     <DisableExtraReferences>true</DisableExtraReferences>
+    <UserSecretsId>f4efe3a1-321a-412e-bcd4-0244665e8da9</UserSecretsId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,7 +72,7 @@
     <None Remove="Zebble-LicenseAgreement.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Zebble.WebView" Version="4.3.266" />
+    <PackageReference Include="Zebble.WebView" Version="4.3.269" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Android\" />

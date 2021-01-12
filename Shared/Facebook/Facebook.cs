@@ -1,5 +1,7 @@
 ﻿namespace Zebble
 {
+    using Olive;
+
     public static partial class Facebook
     {
         static string ApplicationId => Config.Get("Facebook.App.Id");
