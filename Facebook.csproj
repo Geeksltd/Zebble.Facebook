@@ -7,7 +7,7 @@
     <RootNamespace>Zebble</RootNamespace>
     <PackageId>Zebble.Facebook</PackageId>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>2.1.453.0</Version>
+    <Version>2.1.454.0</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -28,7 +28,6 @@
     <Authors>Geeks Ltd</Authors>
     <Copyright>Geeks Ltd 2020, All rights reserved.</Copyright>
     <DisableExtraReferences>true</DisableExtraReferences>
-    <UserSecretsId>f4efe3a1-321a-412e-bcd4-0244665e8da9</UserSecretsId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
     <DebugSymbols>true</DebugSymbols>
