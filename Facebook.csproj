@@ -71,7 +71,7 @@
     <None Remove="Zebble-LicenseAgreement.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Zebble.WebView" Version="4.3.270" />
+    <PackageReference Include="Zebble.WebView" Version="4.3.271" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Android\" />
