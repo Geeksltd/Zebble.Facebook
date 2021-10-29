@@ -75,7 +75,7 @@
                 Log.For(typeof(Facebook)).Error("An error occurred in Facebook :[" + error + "]");
                 await OnError.Raise(error.ToString());
             }
-            else if (result.IsCancelled)
+            else if (result?.IsCancelled ?? true)
             {
                 await OnCancel.Raise();
             }
@@ -103,7 +103,6 @@
                     Log.For(typeof(Facebook)).Error(e);
                     throw;
                 }
-
             }
         }
 
